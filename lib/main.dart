@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 
@@ -12,8 +11,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
-
-  await FlutterFlowTheme.initialize();
 
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
@@ -44,7 +41,7 @@ class MyAppScrollBehavior extends MaterialScrollBehavior {
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
 
-  ThemeMode _themeMode = FlutterFlowTheme.themeMode;
+  ThemeMode _themeMode = ThemeMode.system;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
@@ -81,7 +78,6 @@ class _MyAppState extends State<MyApp> {
 
   void setThemeMode(ThemeMode mode) => safeSetState(() {
         _themeMode = mode;
-        FlutterFlowTheme.saveThemeMode(mode);
       });
 
   @override
@@ -104,9 +100,6 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
       ),
       themeMode: _themeMode,
       routerConfig: _router,

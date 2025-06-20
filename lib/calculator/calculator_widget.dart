@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'calculator_model.dart';
 export 'calculator_model.dart';
@@ -550,13 +551,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 onChanged: (_) => EasyDebounce.debounce(
                                   '_model.textController',
                                   Duration(milliseconds: 2000),
-                                  () async {
-                                    FFAppState().operations =
-                                        _model.textController.text;
-                                    safeSetState(() {});
-                                  },
+                                  () => safeSetState(() {}),
                                 ),
                                 onFieldSubmitted: (_) async {
+                                  FFAppState().operations = '';
+                                  safeSetState(() {});
                                   FFAppState().operations =
                                       _model.textController.text;
                                   safeSetState(() {});
@@ -571,6 +570,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                     _model.textController?.text =
                                         FFAppState().operations;
                                   });
+                                  // Vibrate
+                                  HapticFeedback.vibrate();
+                                  if (animationsMap[
+                                          'buttonOnActionTriggerAnimation20'] !=
+                                      null) {
+                                    safeSetState(
+                                        () => hasButtonTriggered20 = true);
+                                    SchedulerBinding.instance.addPostFrameCallback(
+                                        (_) async => await animationsMap[
+                                                'buttonOnActionTriggerAnimation20']!
+                                            .controller
+                                            .forward(from: 0.0));
+                                  }
 
                                   safeSetState(() {});
                                 },
@@ -582,14 +594,44 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium
+                                                  .fontStyle,
+                                        ),
                                         letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .fontStyle,
                                       ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Inter',
+                                        font: GoogleFonts.inter(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
@@ -626,8 +668,21 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .displaySmall
                                     .override(
-                                      fontFamily: 'Inter Tight',
+                                      font: GoogleFonts.interTight(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .fontStyle,
+                                      ),
                                       letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .fontStyle,
                                     ),
                                 textAlign: TextAlign.start,
                                 maxLines: 4,
@@ -699,11 +754,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -748,11 +811,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -797,11 +868,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -846,11 +925,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -901,11 +988,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -950,11 +1045,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -999,11 +1102,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1048,11 +1159,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1103,11 +1222,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1152,11 +1279,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1201,11 +1336,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1250,11 +1393,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1305,11 +1456,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1354,11 +1513,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1403,11 +1570,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1452,11 +1627,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1506,11 +1689,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1555,11 +1746,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1604,11 +1803,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Color(0xFF101518),
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 2.0,
                                 borderRadius: BorderRadius.circular(40.0),
@@ -1619,6 +1826,11 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 hasBeenTriggered: hasButtonTriggered19),
                             FFButtonWidget(
                               onPressed: () async {
+                                FFAppState().operations = '';
+                                safeSetState(() {});
+                                FFAppState().operations =
+                                    _model.textController.text;
+                                safeSetState(() {});
                                 _model.actionResult =
                                     await actions.evaluateExpression(
                                   FFAppState().operations,
@@ -1659,11 +1871,19 @@ class _CalculatorWidgetState extends State<CalculatorWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 28.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .fontStyle,
                                     ),
                                 elevation: 0.0,
                                 borderRadius: BorderRadius.circular(40.0),
